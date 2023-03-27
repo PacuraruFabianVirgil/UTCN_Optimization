@@ -1,0 +1,690 @@
+Question_statements:
+  background: |
+    Statements have the form:
+    >> variable = expression
+    Equality "=" implies the assignment of the expression to the variable. The command prompt
+    is represented by two right arrows ">>"
+    The assignment of value 1 to the variable a is executed after the enter key is pressed.
+    >> a = 1
+    You can observe that after the assignment, the value that is stored in the variable is printed
+    on the screen. Printing all the values of all the variables can affect a lot the speed of
+    execution of your program. To suppress the output of any assignment or result, use the semicolon (;)
+    in a statement
+    >> a = 1; #Does not print any result. Now try it yourself.
+  question: Define a variable 'a' with the value '56'
+  type: commands
+  preeval: [clear('a')]
+  evaluation: ['exist(''a'',''var'')', 'a==56']
+  posteval: [clear('a')]
+  courses: ['all']
+Question_row_vector:
+  background: |
+    In MATLAB (and in mathematics in general) there is a difference between a row (line) and a column vector.
+    It is very important to define the correct type of vector each time, because calculations can
+    be wrong otherwise. To define a vector, we use the square brackets '[' (to denote the beginning of the vector) and ']'
+    (to denote the end of the vector). The numbers we place between the brackets are the vector elements. For a row vector the
+    element can be separated either by spaces or by commas.
+
+    >> t = [1 2 3 4 5 6 7 8];
+    >> k = [1,2,3,4,5,6,7,8];
+
+    Row vectors t and k are identical. Let's try to make a row vector
+  question: Define a row vector 'm' with 8 random elements
+  type: commands
+  preeval: [clear('m')]
+  evaluation: ['exist(''m'',''var'')', 'size(m)==[1,8]']
+  posteval: [clear('m')]
+  courses: ['all']
+Question_col_vector:
+  background: |
+    To define column vectors, the syntax is very similar. Instead of using spaces or commas, you
+    need to use semicolons (;) to separate the elements.
+
+    >> c = [1;2;3;4;5;6;7;8];
+
+    This results in a vector that looks like this:
+    c=[1
+    2
+    3
+    4
+    5
+    6
+    7
+    8]
+    Do you think you are ready to define your first column element?
+  question: Define a column vector 'p' with exactly 6 elements
+  type: commands
+  preeval: [clear('p')]
+  evaluation: ['exist(''p'',''var'')', 'size(p)==[6,1]']
+  posteval: [clear('p')]
+  courses: ['all']
+Question_sequences:
+    background: |
+      Sometimes, we need several sequences of numbers for our MATLAB programs. When you need a very
+      big sequence of numbers, it is unpractical to type all the numbers by hand. Luckily MATLAB has
+      a quick way to generate them, using the colon symbol (:)
+      You can create a sequence of integers by specifying the first and last integer, separated by a
+      colon
+
+      >> 1:20
+      ans =
+        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+
+      By default, the sequence is created by incrementing by 1, but different increments can be chosen.
+      Simply sandwich the increment that you want between the first and last value, and separate by a colon.
+
+      >> 0:5:20
+      ans =
+        0 5 10 15 20
+
+      You can also use a decimal or a negative number as an increment!
+      Go ahead and try it!
+    question: Define a row vector 'b' with numbers from 4 until 52 with an increment of 8
+    type: commands
+    preeval: [clear('b')]
+    evaluation: ['exist(''b'',''var'')','b==4:8:52']
+    posteval: [clear('b')]
+    courses: ['all']
+Question_operations:
+    background: |
+      Creating vectors and sequences are not all that we want to do in MATLAB. We need to operate on them.
+      You can do several things with vectors, such as add values to them. As in mathematics, if we add
+      a value to a vector, this value is actually added on each of the elements.
+      Let's assume we have the vector b you just created
+      >> b=4:8:52
+      ans =
+        b = 4 12 20 28 36 44 52
+
+      We can add the value 5 on the vector, as simple as this:
+      >> c=b+2
+      ans
+        c = 9 17 25 33 41 49 57
+
+      We can also add two vectors together, but only if they are the same dimensions (same length and both row or colomn vectors)
+      >> a=b+c
+      ans
+        a = 13 29 45 61 77 93
+    question: |
+      Write the command to calculate the difference between vectors
+      'c' and 'b' from the previous example and store it in variable 'a'
+    type: commands
+    preeval: ['b=4:8:52','c=b+5', 'clear(''a'')']
+    evaluation: ['exist(''a'',''var'')','isequal(a,[5 5 5 5 5 5 5])']
+    posteval: ['clear(''b'',''c'',''a'')']
+    courses: ['all']
+Questions_line_commands:
+    background: |
+      Sometimes, it is useful to execute multiple commands writen on the same line. To
+      do that, write all the commands on the same line and separate them with a semicolon (;).
+
+      >> a = [1 2 3]; b = [4 5 6]; c=b-a;
+
+      This series of commands execute one after the other, therefore variables defined at the
+      beginning of the line can be used for operations later on the same line
+    question: |
+      Create two row vectors ('a' and 'b') with elements '5 6 7' and 
+      '8 9 10' respectively and save their sum into a vector 'c'. 
+      Do this in one line
+    type: commands
+    preeval: ['clear(''a'',''b'',''c'')']
+    evaluation: ['isequal(a,[5 6 7])','isequal(b,[8 9 10])','isequal(c,a+b)']
+    posteval: ['clear(''a'',''b'',''c'')']
+    courses: ['all']
+Question_powers:
+    background: |
+      MATLAB allows us to perform several operataions on numbers and matrices. Here's a list of possible operations
+      Considering a scalar (number) 's', a row vector 'r' and a column vector 'c', we can:
+
+      Add a scalar to a vector
+      >> qa = r+s
+      >> wa = c+s
+      Multiply a vector by a scalar
+      >> qm = r*s
+      >> wm = c*s
+      Raise a number to a power (e.g. square)
+      >> ss = s^2
+      Find the square root of a number
+      >> sr = sqrt(s)
+      Transpose a vector
+      >> ct = c' # from column to row
+      >> rt = r' # from row to column
+
+      You have to be careful, as all operation must be defined mathematicall (e.g. you cannot raise a row vector to a power)
+    question: |
+      Define a row vector 'a' with elements [1 2 3]. 
+      Define another vector 'b', which has the following form:
+      'a' plus 10, and everything is multiplied by 2.
+    type: commands
+    preeval: ['clear(''a'')','clear(''b'')']
+    evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1 2 3])','isequal(b,[22 24 26])']
+    posteval: ['clear(''a'')','clear(''b'')']
+    courses: ['all']
+Question_vector_manipulation:
+    background: |
+      Beside the previously mentioned operations, it is possible to perform several vector manipulations,
+      without doing any unnecesary looping. MATLAB is optimized for these kind of operations,
+      and will perform much faster than with several iterations. 
+      Fo instance you have the vector :
+      >> a = [23 42 45 7 9 4 43];
+      You can select the 2nd, 5th and 6th elements in the following way:
+      >> a([2 5 6])
+      ans =
+      42     9     4
+
+      Also if you want to access the last element from a vector you can use the keyword: "end"
+      For example:
+      >> a(end)
+      ans =
+      43
+
+      In order to define the selection of several elements a vector can be used:
+      to every third element from a vector you can use:
+      >> a(1:3:end)
+      ans =
+      23     7    43
+    question: |
+      Define a row vector 'a' with elements from 1 to 77, with increment 2.
+      Select every 5th element from vector 'a', starting from the first one, 
+      and save them in vector 'b'. (Hint: Read background!)
+    type: commands
+    preeval: ['clear(''a'')','clear(''b'')']
+    evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1:2:77])','isequal(b,a([1:5:end]))']
+    posteval: ['clear(''a'')','clear(''b'')']
+    courses: ['all']
+Question_dimensions:
+    background: |
+      Besides defining vectors in one dimension, it is possible to define matrices in multiple dimensions.
+      To do that, we use a combination of the notation for row and column vectors. To define a two dimensional
+      matrix 'b' we use the following syntax
+
+      >> b = [1 3 4 5;5 6 7 10];
+
+      This command will create a two dimensional matrix with 2 rows and four columns. You can inspect the size
+      of a matrix or vector using the 'size' command
+
+      >> size(b)
+      ans =
+        2   4
+      The first number corresponds to the length of the first dimension (rows) and the second to the second dimension (columns)
+
+      We can also retrieve specific elements of a matrix using 'indeces'. For a two dimensional matrix, we need
+      to specify which row and which column does the element reside. Using our previously defined matrix b, we can
+      request the element of the second row and third column like this:
+
+      >> b(2,3)
+
+      Remember that we first need to define the row and then the column
+    question: |
+      Define a two dimensional matrix 'b' with 4 rows and 3 columns
+      with elements from 1 until 12, filled by column!!!
+      Then save the element in 3rd row and 2nd column of 'b' in a variable 'c'
+    type: commands
+    preeval: ['clear(''b'',''c'')']
+    evaluation: ['exist(''b'',''var'')','exist(''c'',''var'')','isequal(b,[1 5 9;2 6 10;3 7 11;4 8 12])','isequal(c,7)']
+    posteval: ['clear(''b'',''c'')']
+    courses: ['all']
+Question_element_wise:
+    background: |
+      When working with matrices, sometimes we want to operate on the matrix as a whole, and sometimes we want to
+      operate on each of the elements of the matrix. A good example is the square operation of an matrix. By definition
+      squaring of an matrix means that we multiply it by itself. However, that is only possible for square matrices.
+
+      Consider a matrix H with MxM dimensions. To calcuate its square, we could raise the matrix to the power of two
+      >> H = [1 2 3; 4 5 6; 7 8 9];
+      >> HH = H^2 # This implies that we perform the following operation HH = H*H
+      HH =
+        30 36 42
+        66 81 96
+        102 126 150
+
+      If we however want to calculate the square of each element of the matrix (element-wise) operation, we need a slightly different syntax
+
+      >> HH = H.^2 # Pay attention to the dot. This will square each element of the matrix.
+      HH =
+        1  4  9
+        16 25 36
+        49 64 81
+
+      We can use the '.' notation for other operations besides raising to a power, such as division.
+    question: |
+      Define H as a 3x3 matrix such as the H in the example
+      and a second 3x3 matrix M as the transpose of H.
+      Calculate the element-wise division of H by M and save it in matrix D. 
+      (In one line)
+    type: commands
+    preeval: ['clear(''H'',''M'',''D'',''h'',''m'')','h=[1 2 3;4 5 6;7 8 9]','m=h']
+    evaluation: ['exist(''H'',''var'')','exist(''M'',''var'')','isequal(D,h./m)||isequal(D,H./M)']
+    posteval: ['clear(''H'',''M'',''h'',''m'')']
+    courses: ['all']
+Question_builtin_functions:
+    background: |
+      To avoid having to write a lot of complicated operations with vectors and matrices,
+      MATLAB has a lot of builtin standard functions and constants that can be used to simplify things.
+      Almost all trigonometric functions are available as builtin functions, such as the function of
+      sine and cosine (sin(x) and cos(x) respectively). To use such a function, simply call the function
+      by its name and insert a number as an argument. For example, to save the cosine of 45 degrees
+      in a variable 'a' we can type this in the MATLAB command line:
+
+      >> a = cos(pi/4)
+
+      Notice that we need to provide the angle in radians. That is why we use the builtin constant 'pi'.
+      You can also notice that we can do operations inside the brakets (division in this case), or we could
+      even insert other functions as well.
+
+      >> b = sin(asin(pi/4))
+
+      In this case, we are calculating first the arcsine of pi/4 radians (45 degrees) and then we calculate
+      the sine of this result.
+
+      MATLAB has a very extensive library of builtin functions, which depends on which toolboxes are installed
+      on your system. To know which functions exist is a matter of experience. If you want to know how
+      to use a specific function, you can always use the 'help' command, followed by the name of the function
+
+      >> help sin #Provides help on how to use the sin function
+    question: |
+      Calculate the result of the sine of 45 degrees divided by the cosine of 45 degrees.
+      Then calculate the arctan of the result and store it in variable 'h'. 
+      (Hint: Use pi/4 for 45 degrees)
+    type: commands
+    preeval: ['clear h']
+    evaluation: ['exist(''h'',''var'')','h==pi/4']
+    posteval: ['clear h']
+    courses: ['all']
+Question_polynomials:
+    background: |
+      In MATLAB, a polynomial is represented by a vector. To create a polynomial in MATLAB, the coefficients
+      of the polynomial should be entered in descending order as elements of a vector. For instance, to enter
+      the following polynomial:
+
+      p(s) = s^4 + 3*s^3 - 15*s^2 - 2*s + 9
+
+      you need to enter the vector in this manner:
+
+      >> p = [1 3 -15 -2 9]
+
+      Remember that zero coefficients need to be entered as well (by placing a zero in the respective elements).
+
+      Then MATLAB has builtin functions to operate on polynomials defined like this
+
+      - roots(p)             Roots of polynomial p
+      - polyval(p,value)     Value of polynomial p at value
+      - conv(p,q)            Polynomial multiplication
+      - deconv(p,q)          Polynomial division
+    question: |
+      Define the following polynomial in variable 'p'. 
+      Find the value for the polynomial at p(2) and store the result in variable 'v'
+        p(s) = s^8 + 5s^5 - 3s^2 + 10
+    type: commands
+    preeval: ['clear(''p'',''c'')']
+    evaluation: ['exist(''p'',''var'')','exist(''v'',''var'')','isequal(p,[1 0 0 5 0 0 -3 0 10])','isequal(v,polyval(p,2))']
+    posteval: ['clear(''p'',''c'')']
+    courses: ['optimisation']
+Question_scripts:
+    background: |
+      When performing multiple operations in several variables, it is sometimes useful if we can
+      save the commands in order to execute them multiple times. This is simply done by creating
+      'scripts'. To create a script, click on 'New' and then 'Script'. You will see the editor appearing.
+      You can now type multiple commands that will be executed sequentiatlly. You will need to save the script
+      before executing it, by clicking on the 'Save' button.
+
+      To execute the script, type the name of the script in the command line and press enter.
+    question: |
+      Write a script with filename 'script.m' that performs the following operations
+      - Defines an matrix 'a' with elements [1 2 3 4;5 6 7 8]
+      - Defines a row vector 'b' as a sequence from 1 to 100 with increment 2
+      - Stores the element-wise squaring of matrix 'a' into a matrix 'c'
+
+      Press enter when the script is ready.
+    type: commands
+    preeval: ['clear(''a'',''b'',''c'')','rehash','if exist(''script.m'',''file''); script; end']
+    evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','exist(''c'',''var'')','isequal(a,[1 2 3 4;5 6 7 8])','isequal(b,1:2:100)','isequal(c,a.^2)']
+    posteval: ['clear(''a'',''b'',''c'')']
+    courses: ['all']
+Question_user_functions:
+    background: |
+      Besides builtin functions, we can also create our own functions in MATLAB. This is similar to
+      creating scripts, but all the commands defined must be surrounded by a 'function' statement.
+      The use of functions allows us to avoid duplication of code by grouping operations that are
+      performed very frequently. Here's how a simple function for adding two numbers is defined
+
+        function [c,d] = addition_subtraction(a,b)
+          c = a+b;
+          d = a-b;
+        end
+
+      Each function can have multiple input and output arguments. The input arguments are defined on the right
+      side of the function name inside a braket and are separated by a comma. The output arguments are defined
+      on the left side of the function name inside square brackets and are separated by a comma.
+
+      We can save this function in a file to keep things cleaner. The name of the file must match the
+      name of the function.
+
+      Later on, we can call the function with any arguments we want and retrieve the results
+
+      >> addition_subtraction(4,2)
+      ans =
+        6  2
+    question: |
+      Define a function 'my_multip' in a file with the same name. The function should take two
+      arguments (numbers) and it should return one output with the result of the
+      multiplication between the two numbers.
+      Press enter when the file is ready
+    type: commands
+    preeval: ['rehash','s=functions(@my_multip)']
+    evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
+    posteval: ['clear(''s'')']
+    courses: ['optimisation']
+Question_constants:
+    background: |
+
+      Some constants in MATLAB have a less straighforward syntax. For instance if you want to use the e number,
+      you have to use the function exp(x), which will return the e^x.
+
+      You can use all of these already existing constants and functions inside of your own function.
+      Remember! If you are not sure about how a certain function works is it a good practice to use the help.
+
+    question: |
+      Create a function with name 'my_exp' which has two input arguments, for instance 'a' and 'b'.
+      The function output is: 'e' at the power of ('a' at the power of 'b') multiplied with pi.
+      Where 'e' is the Euler's number.
+      Press enter when ready
+    type: commands
+    evaluation: ['~isempty(s.file)','nargin(@my_exp)==2','my_exp(2,4)==exp(2^4)*pi']
+    preeval: ['rehash','s=functions(@my_exp)']
+    posteval: ['clear(''s'')']
+    courses: ['all']
+Question_plotting:
+    background: |
+      Plotting is a very good way to inspect a function or some results by visualising them and observing any existing trends.
+      The most simple way to plot data is using a 2 dimensional (2D) plot, which plots a vector (e.g. x) against another vector (e.g. y)
+      To do this, we simple use the 'plot' function and specifying the vectors that we want to use for plotting:
+
+      >> plot(x,y)
+
+      The vectors x and y should have been previously defined and they should have the same size (i.e. dimensions and lengths)
+
+      A good example of visualisation is visualising the sine as a function of time. To do that, we first need to create a 't' vector representing the time
+      and then calculate the sine for the specific values of time.
+
+      >> t=0:0.25:7; y=sin(t); plot(t,y)
+
+      Basic plotting is very easy in Matlab, and the plot command has extensive add-on capabilities. These capabilities include many functions such as:
+
+      grid: Toggles a grid on and off the current figure
+      axis: Controls axis scaling and appearance
+      title('text'): Adds 'text' at the top of the current axis
+      xlabel('text'): Labels the x-axis with 'text'
+      ylabel('text'): Labels the y-axis with 'text'
+      subplot: Creates axes in tiled positions
+    question: |
+      Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
+    type: commands
+    preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    posteval: ['close all']
+    courses: ['optimisation']
+Question_mesh:
+    background: |
+      Plotting in 3D is even more fun and useful. Consider the function f(x,y) = x^2 + y^2
+      To graphically represent this function, first the values of x and y have to be defined using 'meshgrid'
+
+      >> [x,y] = meshgrid(-1:.01:1);
+
+      This command creates a grid of values for x and y, ranging from -1 to 1 with an increment of 0.01.
+      The range or increment can also be different for the two variables
+
+      >> [x,y] = meshgrid(-1:.01:1,-2:.01:2);
+
+      For plotting the graphical representation of the function at the points x,y we use the mesh command
+
+      >> mesh(x,y,x.^2+y.^2);
+
+      The value of the function is computed and plotted for each point on the grid. The z value and the colour
+      of the plot is related to the resulting value of the function for each point.
+
+    question: |
+      Create a script with filename 'mesh_script' that does the following
+      - Creates a mesh grid for x and y between -pi and pi with increment of 0.01.
+      - Plot the 3D graphical representation of the function sine(x) + cosine(y) - sine(y)
+
+      Press enter when the script is ready
+    type: commands
+    preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','mesh(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''mesh_script.m'',''file''); mesh_script; end']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    posteval: ['close all']
+    courses: ['optimisation']
+Question_contour:
+    background: |
+      Sometimes, using a 2D representation of such functions can also be useful, specifically when plotting
+      the projection on the XY plane. To do this, we can use the 'contour' function the same way as the 'mesh' function
+
+      >> [x,y] = meshgrid(-1:.01:1,-2:.01:2);
+      >> contour(x,y,x.^2+y.^2);
+    question: |
+      Create a script with filename 'contour_script' that does the following
+      - Creates a mesh grid for x and y between -pi and pi with increment of 0.01
+      - Plot the 2D contour graphical representation of the function sine(x) + cosine(y) - sine(y)
+
+      Press enter when the script is ready
+    type: commands
+    preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','contour(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''contour_script.m'',''file''); contour_script; end']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    posteval: ['close all']
+    courses: ['optimisation']
+Question_structures:
+    background: |
+      After working a lot in matlab, you will realise that, it is not a good practice to create separate
+      variables for each parameter. A much better option is to use STRUCTURES, which are very easy to create here.
+
+      A structure is a collection of variables that don't have to be of the same type. Each variable is stored in separete
+      fields, and each field can be of any type.
+
+      For instance, you can have a ''fruit'' structure, and it can have fields such as ''name'', ''colour'' and ''weight''.
+      The name and colour fields should probably be strings, but the weight field would be better represented by a double.
+
+      To define a structure with fields, we use the dot syntax as following:
+
+      >> fruit.name = 'orange';
+      >> fruit.colour = 'orange';
+      >> fruit.weight = 1; # In kg
+
+      To access the content of a field, we use again the same syntax
+
+      >> fruit.name
+
+      ans =
+        orange
+
+      A field can be a structure by itself, with additional subfields
+
+      >> fruit.colour.skin = 'orange';
+      >> fruit.colour.leaves = 'green';
+
+      Finally, we can also create an array type struct and store multiple elements with the same fields
+
+      >> fruit(2).name = 'apple';
+      >> fruit(2).colour.skin = 'red';
+      >> fruit(2).colour.leaves = 'green';
+      >> fruit(2).weight = 0.5;
+      >> fruit(2)
+
+      ans =
+
+        name: 'apple'
+        colour: [1x1 struct]
+        weight: 1
+
+      >> fruit(2).colour
+      ans =
+
+        skin: 'red'
+        leaves: 'green'
+
+    question: |
+      Create a 'my_self' structure, which contains 3 fields:
+      name - your name (as a string)
+      sex - your sex (as a string)
+      age - your age (as a double)
+
+      Hint: you have to do everyting in one line :)
+    type: commands
+    evaluation: [ 'exist(''my_self'')','isfield(my_self,''name'')','isfield(my_self,''sex'')','isfield(my_self,''age'')','strcmp(class(my_self.name),''char'')','strcmp(class(my_self.sex),''char'')','strcmp(class(my_self.age),''double'')']
+    preeval: ['clear(''my_self'')']
+    posteval: ['clear(''my_self'')']
+    courses: ['all']
+Question_symbolic:
+    background: |
+      The Symbolix Math toolbox allows one to work with symbolic variables. A symbolic variable 'x'
+      is defined as
+
+      >> syms x
+
+      Standard MATLAB operations and functions can be used on symbolic variables, and the returned result
+      will be symbolic as well (i.e. a generic variable that can be used without values). Symbolic variables
+      can be combined to create more complicated structures, such as symbolic functions
+
+      >> syms x y z
+      >> f = x+y;
+      >> g = 2*y+z;
+      >> h = f*g
+        h =
+          (x+y)*(2*y+z)
+
+      To evaluate a symbolic variable for a given set of values, you can use the 'subs' function (for one variable)
+
+      >> subs(f,x,1)
+      ans =
+          y+1;
+    question: Define a symbolic function f with symbolic variables x and y as f=x^2+3*y.
+    type: commands
+    preeval: ['clear(''f'',''x'',''y'')']
+    evaluation: ['isa(x,''sym'')','isa(y,''sym'')','isa(f,''sym'')','isequal(f,x^2+3*y)||isequal(f(x,y),x^2+3*y)']
+    posteval: ['clear(''f'',''x'',''y'')']
+    courses: ['all']
+Question_sym_diff:
+    background: |
+      Symbolic functions can be differentiated or integrated, using diff or int respectively. In general
+      symbolic operations (such as diff or int) must be performed before any evaluation of variables.
+      We can differentiate with respect to a single variable like this
+
+      >> syms x y z;
+      >> h = (x+y)*(2*y+z);
+      >> diff(h,x)       #Differentiation with respect to x
+      ans =
+        2*y+z
+      >> diff(diff(h,x),y)       #Differentiation with respect to x and then to y
+      ans =
+        2
+
+      Or we can differentiate with respect to all the variables (i.e. Jacobian)
+      >> g = jacobian(h)
+      g =
+        [2*y+z, 4*y+z+2*x, x+y]
+
+      One can also solve symbolic equations
+
+      >> syms x
+      >> sol = solve('x^2+3*x=2')         # Second order polynomial equation
+      sol =
+        -3/2+1/2*17^(1/2)
+        -3/2-1/2*17^(1/2)
+
+      Or even systems of equations
+
+      >> syms x y
+      >> sol = solve('x^2+3*x=2','x+y=3')
+      sol.x =
+        -3/2+1/2*17^(1/2)
+        -3/2-1/2*17^(1/2)
+      sol.y =
+        9/2-1/2*17^(1/2)
+        9/2+1/2*17^(1/2)
+
+      The results are treated as symbolic variables and to obtain the exact value, they must be evaluated
+    question: |
+      Define a symbolic expression f as f=x^2+y^3+2xy 
+      and save in variable g the jacobian of f
+    type: commands
+    preeval: ['clear(''f'',''x'',''y'',''g'')','syms x y','fi = x^2+y^3+2*x*y']
+    evaluation: ['exist(''f'',''var'')','exist(''g'',''var'')','exist(''x'',''var'')','exist(''y'',''var'')','isequal(f,fi)','isequal(g,jacobian(f))']
+    posteval: ['clear(''f'',''x'',''y'',''g'')']
+    courses: ['optimisation']
+Question_conditions:
+    background: |
+      At this point you should be already familiar with the variable declaration, in several ways.
+      As in other programming languages, in MATLAB we can also write loops and logical statements.
+      The 'if' statement has the following form:
+
+        if (condition)
+            statement, variable etc.
+        else
+            statement, variable etc.
+        end
+
+      'while':
+        while (condition)
+            statement, variable etc.
+        end
+
+      The 'for' loop is a little bit different from other programming languages
+        for  var= expression
+            statement, variable etc.
+        end
+
+      For example the expression can be i=1:10 or i=1:2:10 etc.
+    question: |
+      Create a function, with name 'my_stat' which has two input arguments, 'x', 'y'.
+      In the function you have to check if the input 'x' is a vector or a scalar.
+      If scalar:
+          iterate the following equation 10 times: a = a +(x^i)*y+ y/x; where a=0, i=1; before the iteration;
+          The output is 'a'
+      If vector:
+          insert the scalar 'y' into the vector 'x'
+          sort the vector 'x' in ascending order
+          the output is a sorted ROW
+    type: commands
+    evaluation: ['~isempty(s.file)','nargin(@my_stat)==2','my_stat(2,4)==8204', 'my_stat([1 3 2],4)== [1 2 3 4]' ]
+    preeval: ['rehash','s=functions(@my_stat)']
+    posteval: ['clear(''s'')']
+    courses: ['optimisation']
+Question_vector_operations:
+    background: |
+      The rules of linear algebra are very specific as to what kind of operations are allowed between
+      vectors and matrices of various dimensions. You should always be careful on how define row and
+      column vectors for multiplications to be not only possible but also meaningful.
+
+      Take the following control law for example:
+
+        x(k+1) = A*x(k) + B*u(k)
+
+      If A is a square matrix, and B a column vector, then x should be a column vector with the same length as matrix A and u a scalar. The result
+      x(k+1) will also be a column vector.
+
+      If we want to calculate the output of the system for many iterations, and store the values for each iteration, it is convienient if
+      we store together all the column vectors x(k) in a matrix with columns equal to the number of iterations (k). When calculating the output for
+      the next iteration, we must take only the appropriate column from the matrix (column k).
+    question: |
+      Write a script called 'control_law.m' for calculating 5 steps of the above control law. Store all the values of x, in a matrix called 'x',
+      placing the result of each iteration in a column of matrix x. Consider the following matrices:
+
+        A = [2 1 0
+             2 1 3
+             1 2 1] 
+
+        B = [0
+             1
+             2]
+
+        x(0) = [1
+                2 
+                3]
+
+        u = 1 (constant, does not change with k)
+    type: commands 
+    preeval: ['clear(''A'',''B'',''x'',''u'')','rehash','if exist(''control_law.m'',''file''); control_law; end']
+    evaluation: ['exist(''A'',''var'')','exist(''B'',''var'')','exist(''u'',''var'')','isequal(x,[1,4,22,97,424,1795;2,14,53,230,947,3995;3,10,44,174,733,3053])','isequal(u,1)']
+    posteval: ['clear(''A'',''B'',''x'',''u'')']
+    courses: ['all']
+
+
+
