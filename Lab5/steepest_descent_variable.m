@@ -8,11 +8,9 @@ F = f(X1,X2);
 contour(X1,X2,F)
 hold on;
 plot(X(1),X(2),'r*')
-aux = X;
 grad1 = matlabFunction(symfun(diff(f,x1),[x1 x2]));
 grad2 = matlabFunction(symfun(diff(f,x2),[x1 x2]));
-Xf = [-99999999; -99999999];
-while norm(Xf-aux)>eps
+while true
     gradient = [grad1(X(1),X(2)); grad2(X(1),X(2))];
     a = 0; b = 2;
     g = matlabFunction(f(X(1)-s*gradient(1)/norm(gradient),X(2)-s*gradient(2)/norm(gradient)));
@@ -22,5 +20,8 @@ while norm(Xf-aux)>eps
     aux = X;
     X = Xf;
     plot(Xf(1),Xf(2),'r*')
+    if norm(Xf-aux)<eps
+        break;
+    end
 end
 end
