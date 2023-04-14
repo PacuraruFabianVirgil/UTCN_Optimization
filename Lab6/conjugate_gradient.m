@@ -8,16 +8,14 @@ F = f(X1,X2);
 contour(X1,X2,F)
 hold on;
 plot(X(1),X(2),'r*')
-aux = X;
-grad1 = matlabFunction(symfun(diff(f,x1),[x1 x2]))
-grad2 = matlabFunction(symfun(diff(f,x2),[x1 x2]))
+grad1 = matlabFunction(symfun(diff(f,x1),[x1 x2]));
+grad2 = matlabFunction(symfun(diff(f,x2),[x1 x2]));
 d = [-grad1(X(1),X(2)); -grad2(X(1),X(2))];
-Xf = [-99999999; -99999999];
-while norm(Xf-aux)>eps
+while true
     a = 0; b = 2;
-    g = matlabFunction(f(X(1)+s*d(1),X(2)+s*d(2)))
-    [a2_golden,b2_golden] = golden(g,a,b,eps/10);
-    step = (a2_golden+b2_golden)/2;
+    g = matlabFunction(f(X(1)+s*d(1),X(2)+s*d(2)));
+    [a2_golden,b2_golden] = golden(g,a,b,eps/100);
+    step = (a2_golden+b2_golden)/2
     Xf = X + step*d;
     if fletcher
         B = norm([grad1(Xf(1),Xf(2)); grad2(Xf(1),Xf(2))])^2/norm([grad1(X(1),X(2)); grad2(X(1),X(2))])^2;
@@ -29,5 +27,8 @@ while norm(Xf-aux)>eps
     aux = X;
     X = Xf;
     plot(Xf(1),Xf(2),'r*')
+    if norm(Xf-aux)<eps
+        break;
+    end
 end
 end

@@ -1,6 +1,6 @@
-f = @(x1,x2) 81*x1.^2+27*x1.*x2+18*x2.^2+x2.^4-9
-X = [9; 5];
-eps = 0.1;
+f = @(x1,x2) 81*x1.^2+27*x1.*x2+18*x2.^2+x2.^4-9;
+X = [5; 2];
+eps = 0.01;
 Fletcher = true;
 Polak = false;
 XFletcher = conjugate_gradient(f,X,eps,Fletcher)
